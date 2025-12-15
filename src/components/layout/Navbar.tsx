@@ -31,14 +31,17 @@ export const Navbar = () => {
       animate={{ y: 0 }}
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-        scrolled ? 'glass py-3 shadow-card' : 'bg-background/80 backdrop-blur-sm py-5'
+        scrolled ? 'glass py-3 shadow-card' : 'bg-transparent py-5'
       )}
     >
       <div className="container-custom">
         <nav className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-xl overflow-hidden shadow-soft group-hover:shadow-glow transition-all duration-300 bg-background flex items-center justify-center">
+            <div className={cn(
+              "w-12 h-12 rounded-xl overflow-hidden shadow-soft group-hover:shadow-glow transition-all duration-300 flex items-center justify-center",
+              scrolled ? "bg-background" : "bg-white/90"
+            )}>
               <img 
                 src={logo} 
                 alt="Leenbenx Logo" 
@@ -46,10 +49,16 @@ export const Navbar = () => {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-heading font-bold text-lg leading-tight">
+              <span className={cn(
+                "font-heading font-bold text-lg leading-tight transition-colors duration-300",
+                scrolled ? "text-foreground" : "text-white"
+              )}>
                 Leenbenx
               </span>
-              <span className="text-xs text-muted-foreground leading-tight">
+              <span className={cn(
+                "text-xs leading-tight transition-colors duration-300",
+                scrolled ? "text-muted-foreground" : "text-white/80"
+              )}>
                 Cornerstone Investments
               </span>
             </div>
@@ -63,15 +72,17 @@ export const Navbar = () => {
                 to={link.href}
                 className={cn(
                   'link-underline font-medium transition-colors duration-300',
-                  location.pathname === link.href
-                    ? 'text-primary'
-                    : 'text-foreground hover:text-primary'
+                  scrolled
+                    ? (location.pathname === link.href ? 'text-primary' : 'text-foreground hover:text-primary')
+                    : (location.pathname === link.href ? 'text-white' : 'text-white/90 hover:text-white')
                 )}
               >
                 {link.label}
               </Link>
             ))}
-            <Button asChild variant="default" size="lg">
+            <Button asChild variant={scrolled ? "default" : "outline"} size="lg" className={cn(
+              !scrolled && "border-white text-white hover:bg-white hover:text-primary"
+            )}>
               <Link to="/contact">Get Started</Link>
             </Button>
           </div>
@@ -79,9 +90,12 @@ export const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-accent transition-colors"
+            className={cn(
+              "md:hidden p-2 rounded-lg transition-colors",
+              scrolled ? "hover:bg-accent" : "hover:bg-white/20"
+            )}
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className={cn("w-6 h-6", !scrolled && "text-white")} /> : <Menu className={cn("w-6 h-6", !scrolled && "text-white")} />}
           </button>
         </nav>
 
