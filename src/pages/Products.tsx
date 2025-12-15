@@ -4,6 +4,7 @@ import { PageHero } from '@/components/shared/PageHero';
 import { ProductsShowcaseSection } from '@/components/products/ProductsShowcaseSection';
 import { RevenueStreamSection } from '@/components/products/RevenueStreamSection';
 import { ProductsCTASection } from '@/components/products/ProductsCTASection';
+import stovesFactory from '@/assets/stoves-factory.jpg';
 
 const Products = () => {
   return (
@@ -15,6 +16,7 @@ const Products = () => {
           title="Quality Clean Energy"
           highlight="Products"
           subtitle="Diverse portfolio of clean-energy products designed to improve health, reduce energy costs, and protect the environment. From household stoves to institutional solutions."
+          backgroundImage={stovesFactory}
         />
         <ProductsShowcaseSection />
         <RevenueStreamSection />

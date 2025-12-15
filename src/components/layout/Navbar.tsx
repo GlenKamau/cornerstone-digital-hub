@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Leaf } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import logo from '@/assets/leenbenx-logo.png';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -36,9 +37,13 @@ export const Navbar = () => {
       <div className="container-custom">
         <nav className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-soft group-hover:shadow-glow transition-all duration-300">
-              <Leaf className="w-6 h-6 text-primary-foreground" />
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="w-12 h-12 rounded-xl overflow-hidden shadow-soft group-hover:shadow-glow transition-all duration-300 bg-background flex items-center justify-center">
+              <img 
+                src={logo} 
+                alt="Leenbenx Logo" 
+                className="w-10 h-10 object-contain"
+              />
             </div>
             <div className="flex flex-col">
               <span className="font-heading font-bold text-lg leading-tight">
