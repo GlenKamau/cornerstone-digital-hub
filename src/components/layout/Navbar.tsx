@@ -31,30 +31,34 @@ export const Navbar = () => {
       animate={{ y: 0 }}
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-        scrolled ? 'glass py-3 shadow-card' : 'bg-transparent py-5'
+        scrolled ? 'glass py-4 shadow-card' : 'bg-transparent py-6'
       )}
     >
       <div className="container-custom">
         <nav className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className={cn(
-              "w-12 h-12 rounded-xl overflow-hidden shadow-soft group-hover:shadow-glow transition-all duration-300 flex items-center justify-center",
-              scrolled ? "bg-background" : "bg-white/90"
-            )}>
+            <motion.div 
+              whileHover={{ scale: 1.05, rotate: 3 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-16 h-16 rounded-xl overflow-hidden shadow-soft group-hover:shadow-glow transition-all duration-300 flex items-center justify-center bg-transparent"
+            >
               <img 
                 src={logo} 
                 alt="Leenbenx Logo" 
-                className="w-10 h-10 object-contain"
+                className="w-14 h-14 object-contain drop-shadow-lg"
               />
-            </div>
+            </motion.div>
             <div className="flex flex-col">
-              <span className={cn(
-                "font-heading font-bold text-lg leading-tight transition-colors duration-300",
-                scrolled ? "text-foreground" : "text-white drop-shadow-lg"
-              )}>
+              <motion.span 
+                className={cn(
+                  "font-heading font-bold text-xl leading-tight transition-colors duration-300",
+                  scrolled ? "text-foreground" : "text-white drop-shadow-lg"
+                )}
+                whileHover={{ x: 2 }}
+              >
                 Leenbenx
-              </span>
+              </motion.span>
               <span className={cn(
                 "text-xs leading-tight transition-colors duration-300",
                 scrolled ? "text-muted-foreground" : "text-white/90 drop-shadow-lg"
@@ -67,24 +71,27 @@ export const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={cn(
-                  'link-underline font-medium transition-colors duration-300',
-                  scrolled
-                    ? (location.pathname === link.href ? 'text-primary' : 'text-foreground hover:text-primary')
-                    : (location.pathname === link.href ? 'text-white drop-shadow-lg' : 'text-white/90 hover:text-white drop-shadow-lg')
-                )}
-              >
-                {link.label}
-              </Link>
+              <motion.div key={link.href} whileHover={{ y: -2 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  to={link.href}
+                  className={cn(
+                    'link-underline font-medium transition-colors duration-300',
+                    scrolled
+                      ? (location.pathname === link.href ? 'text-primary' : 'text-foreground hover:text-primary')
+                      : (location.pathname === link.href ? 'text-white drop-shadow-lg' : 'text-white/90 hover:text-white drop-shadow-lg')
+                  )}
+                >
+                  {link.label}
+                </Link>
+              </motion.div>
             ))}
-            <Button asChild variant={scrolled ? "default" : "outline"} size="lg" className={cn(
-              !scrolled && "border-white text-white hover:bg-white hover:text-primary drop-shadow-lg"
-            )}>
-              <Link to="/contact">Get Started</Link>
-            </Button>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button asChild variant={scrolled ? "default" : "outline"} size="lg" className={cn(
+                !scrolled && "border-white text-white hover:bg-white hover:text-primary drop-shadow-lg"
+              )}>
+                <Link to="/contact">Get Started</Link>
+              </Button>
+            </motion.div>
           </div>
 
           {/* Mobile Menu Button */}

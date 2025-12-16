@@ -57,29 +57,35 @@ export const HeroSection = () => {
       <div className="hero-overlay absolute inset-0" />
 
       {/* Carousel Navigation */}
-      <button
+      <motion.button
         onClick={goToPrevious}
+        whileHover={{ scale: 1.1, x: -2 }}
+        whileTap={{ scale: 0.95 }}
         className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-colors p-3 rounded-full"
       >
         <ChevronLeft className="w-6 h-6 text-white" />
-      </button>
-      <button
+      </motion.button>
+      <motion.button
         onClick={goToNext}
+        whileHover={{ scale: 1.1, x: 2 }}
+        whileTap={{ scale: 0.95 }}
         className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-colors p-3 rounded-full"
       >
         <ChevronRight className="w-6 h-6 text-white" />
-      </button>
+      </motion.button>
 
       {/* Carousel Indicators */}
       <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {heroImages.map((_, index) => (
-          <button
+          <motion.button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            className={`h-3 rounded-full transition-all duration-300 ${
               index === currentIndex
                 ? 'bg-white w-8'
-                : 'bg-white/40 hover:bg-white/60'
+                : 'bg-white/40 hover:bg-white/60 w-3'
             }`}
           />
         ))}
@@ -171,9 +177,12 @@ export const HeroSection = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.7 + index * 0.1 }}
-                className="text-center"
+                whileHover={{ scale: 1.1, y: -5 }}
+                className="text-center cursor-default"
               >
-                <stat.icon className="w-6 h-6 text-primary-light mx-auto mb-2" />
+                <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
+                  <stat.icon className="w-6 h-6 text-primary-light mx-auto mb-2" />
+                </motion.div>
                 <p className="font-heading font-bold text-2xl md:text-3xl text-primary-foreground">
                   {stat.value}
                 </p>

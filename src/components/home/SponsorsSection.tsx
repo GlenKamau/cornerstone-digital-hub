@@ -75,6 +75,7 @@ export const SponsorsSection = () => {
               initial={{ opacity: 0, y: 30, scale: 0.95 }}
               animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ delay: 0.1 + index * 0.1 }}
+              whileHover={{ y: -8 }}
               className="group"
             >
               <div className="relative bg-background rounded-2xl p-6 shadow-card hover:shadow-soft transition-all duration-500 border border-border hover:border-primary/30 h-full flex flex-col items-center text-center">
@@ -82,13 +83,17 @@ export const SponsorsSection = () => {
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 {/* Logo Container - Made larger */}
-                <div className="relative w-36 h-36 mb-4 rounded-xl bg-white shadow-sm overflow-hidden flex items-center justify-center p-2">
+                <motion.div 
+                  className="relative w-36 h-36 mb-4 rounded-xl bg-white shadow-sm overflow-hidden flex items-center justify-center p-2"
+                  whileHover={{ scale: 1.05, rotate: 2 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
                   <img
                     src={partner.logo}
                     alt={`${partner.name} logo`}
                     className="w-full h-full object-contain"
                   />
-                </div>
+                </motion.div>
 
                 {/* Content */}
                 <div className="relative">

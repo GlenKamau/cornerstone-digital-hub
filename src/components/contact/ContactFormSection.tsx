@@ -96,13 +96,18 @@ export const ContactFormSection = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.2 + index * 0.1 }}
-                  className="flex gap-4 group"
+                  whileHover={{ x: 8, scale: 1.02 }}
+                  className="flex gap-4 group cursor-default"
                 >
-                  <div className="icon-container flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <motion.div 
+                    className="icon-container flex-shrink-0"
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     <item.icon className="w-6 h-6" />
-                  </div>
+                  </motion.div>
                   <div>
-                    <h4 className="font-heading font-semibold mb-1">{item.title}</h4>
+                    <h4 className="font-heading font-semibold mb-1 group-hover:text-primary transition-colors">{item.title}</h4>
                     {item.details.map((detail) => (
                       <p key={detail} className="text-muted-foreground text-sm">
                         {detail}

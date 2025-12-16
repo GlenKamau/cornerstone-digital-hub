@@ -73,10 +73,13 @@ export const CTASection = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.3 + index * 0.1 }}
-                  className="flex items-start gap-3"
+                  whileHover={{ x: 10, scale: 1.02 }}
+                  className="flex items-start gap-3 cursor-default group"
                 >
-                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-background/80">{reason}</span>
+                  <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
+                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5 group-hover:text-secondary transition-colors" />
+                  </motion.div>
+                  <span className="text-background/80 group-hover:text-background transition-colors">{reason}</span>
                 </motion.li>
               ))}
             </ul>
@@ -117,13 +120,19 @@ export const CTASection = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.5 + index * 0.1 }}
-                className={`p-6 rounded-2xl backdrop-blur-sm border border-background/10 ${
-                  stat.color === 'primary' ? 'bg-primary/20' : 'bg-secondary/20'
-                }`}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className={`p-6 rounded-2xl backdrop-blur-sm border border-background/10 cursor-default ${
+                  stat.color === 'primary' ? 'bg-primary/20 hover:bg-primary/30' : 'bg-secondary/20 hover:bg-secondary/30'
+                } transition-colors duration-300`}
               >
-                <p className="font-heading font-bold text-4xl md:text-5xl text-background mb-2">
+                <motion.p 
+                  className="font-heading font-bold text-4xl md:text-5xl text-background mb-2"
+                  initial={{ opacity: 0 }}
+                  animate={isInView ? { opacity: 1 } : {}}
+                  transition={{ delay: 0.7 + index * 0.1 }}
+                >
                   {stat.value}
-                </p>
+                </motion.p>
                 <p className="text-background/60 text-sm">{stat.label}</p>
               </motion.div>
             ))}
