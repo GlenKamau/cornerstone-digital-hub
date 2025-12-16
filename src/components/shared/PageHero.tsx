@@ -36,7 +36,7 @@ export const PageHero = ({
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-foreground/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
         </>
       )}
 
@@ -74,7 +74,7 @@ export const PageHero = ({
               transition={{ delay: 0.1 }}
               className={`inline-block px-4 py-2 rounded-full font-semibold text-sm uppercase tracking-wider mb-6 ${
                 backgroundImage 
-                  ? 'bg-background/20 text-background backdrop-blur-sm' 
+                  ? 'bg-white/20 text-white backdrop-blur-sm' 
                   : 'bg-primary/10 text-primary'
               }`}
             >
@@ -87,12 +87,12 @@ export const PageHero = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className={`font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight ${
-              backgroundImage ? 'text-background' : ''
+              backgroundImage ? 'text-white drop-shadow-lg' : ''
             }`}
           >
             {title}{' '}
             {highlight && (
-              <span className={backgroundImage ? 'text-primary-foreground' : 'text-primary'}>
+              <span className={backgroundImage ? 'text-primary-light' : 'text-primary'}>
                 {highlight}
               </span>
             )}
@@ -103,7 +103,7 @@ export const PageHero = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             className={`text-lg md:text-xl leading-relaxed mb-8 ${
-              backgroundImage ? 'text-background/90' : 'text-muted-foreground'
+              backgroundImage ? 'text-white/90 drop-shadow-md' : 'text-muted-foreground'
             }`}
           >
             {subtitle}
