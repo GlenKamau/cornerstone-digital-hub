@@ -1,20 +1,88 @@
-import { motion } from 'framer-motion';
-import { ArrowRight, Leaf, Wind, Home } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Leaf, Wind, Home, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import heroCooking from '@/assets/hero-cooking.jpg';
+import heroJikoSample from '@/assets/hero-jiko-sample.jpg';
+import heroFactoryOutput from '@/assets/hero-factory-output.jpg';
+import heroCeramicLiners from '@/assets/hero-ceramic-liners.jpg';
+import heroTraining from '@/assets/hero-training.jpg';
+
+const heroImages = [
+  { src: heroJikoSample, alt: 'Jiko Kisasa / Rocket Jiko' },
+  { src: heroFactoryOutput, alt: 'Assembled Cookstoves Factory Output' },
+  { src: heroCeramicLiners, alt: 'Ceramic Liners Production' },
+  { src: heroTraining, alt: 'Hands-on training for women groups' },
+];
 
 export const HeroSection = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev - 1 + heroImages.length) % heroImages.length);
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % heroImages.length);
+  };
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          src={heroCooking}
-          alt="Clean cooking with improved jiko stove"
-          className="w-full h-full object-cover"
-        />
-        <div className="hero-overlay absolute inset-0" />
+      {/* Carousel Background */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0"
+        >
+          <img
+            src={heroImages[currentIndex].src}
+            alt={heroImages[currentIndex].alt}
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
+      </AnimatePresence>
+      
+      {/* Overlay */}
+      <div className="hero-overlay absolute inset-0" />
+
+      {/* Carousel Navigation */}
+      <button
+        onClick={goToPrevious}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-colors p-3 rounded-full"
+      >
+        <ChevronLeft className="w-6 h-6 text-white" />
+      </button>
+      <button
+        onClick={goToNext}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-colors p-3 rounded-full"
+      >
+        <ChevronRight className="w-6 h-6 text-white" />
+      </button>
+
+      {/* Carousel Indicators */}
+      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        {heroImages.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === currentIndex
+                ? 'bg-white w-8'
+                : 'bg-white/40 hover:bg-white/60'
+            }`}
+          />
+        ))}
       </div>
 
       {/* Decorative Elements */}

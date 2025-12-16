@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import logo from '@/assets/leenbenx-logo.png';
+import logo from '@/assets/leenbenx-logo-new.png';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -51,13 +51,13 @@ export const Navbar = () => {
             <div className="flex flex-col">
               <span className={cn(
                 "font-heading font-bold text-lg leading-tight transition-colors duration-300",
-                scrolled ? "text-foreground" : "text-white"
+                scrolled ? "text-foreground" : "text-white drop-shadow-lg"
               )}>
                 Leenbenx
               </span>
               <span className={cn(
                 "text-xs leading-tight transition-colors duration-300",
-                scrolled ? "text-muted-foreground" : "text-white/80"
+                scrolled ? "text-muted-foreground" : "text-white/90 drop-shadow-lg"
               )}>
                 Cornerstone Investments
               </span>
@@ -74,14 +74,14 @@ export const Navbar = () => {
                   'link-underline font-medium transition-colors duration-300',
                   scrolled
                     ? (location.pathname === link.href ? 'text-primary' : 'text-foreground hover:text-primary')
-                    : (location.pathname === link.href ? 'text-white' : 'text-white/90 hover:text-white')
+                    : (location.pathname === link.href ? 'text-white drop-shadow-lg' : 'text-white/90 hover:text-white drop-shadow-lg')
                 )}
               >
                 {link.label}
               </Link>
             ))}
             <Button asChild variant={scrolled ? "default" : "outline"} size="lg" className={cn(
-              !scrolled && "border-white text-white hover:bg-white hover:text-primary"
+              !scrolled && "border-white text-white hover:bg-white hover:text-primary drop-shadow-lg"
             )}>
               <Link to="/contact">Get Started</Link>
             </Button>
@@ -95,7 +95,7 @@ export const Navbar = () => {
               scrolled ? "hover:bg-accent" : "hover:bg-white/20"
             )}
           >
-            {isOpen ? <X className={cn("w-6 h-6", !scrolled && "text-white")} /> : <Menu className={cn("w-6 h-6", !scrolled && "text-white")} />}
+            {isOpen ? <X className={cn("w-6 h-6", !scrolled && "text-white drop-shadow-lg")} /> : <Menu className={cn("w-6 h-6", !scrolled && "text-white drop-shadow-lg")} />}
           </button>
         </nav>
 
@@ -108,7 +108,10 @@ export const Navbar = () => {
               exit={{ opacity: 0, height: 0 }}
               className="md:hidden overflow-hidden"
             >
-              <div className="py-6 space-y-4">
+              <div className={cn(
+                "py-6 space-y-4 rounded-lg mt-2",
+                !scrolled && "bg-black/50 backdrop-blur-md px-4"
+              )}>
                 {navLinks.map((link, index) => (
                   <motion.div
                     key={link.href}
@@ -121,9 +124,9 @@ export const Navbar = () => {
                       onClick={() => setIsOpen(false)}
                       className={cn(
                         'block py-2 font-medium transition-colors',
-                        location.pathname === link.href
-                          ? 'text-primary'
-                          : 'text-foreground hover:text-primary'
+                        scrolled 
+                          ? (location.pathname === link.href ? 'text-primary' : 'text-foreground hover:text-primary')
+                          : (location.pathname === link.href ? 'text-white' : 'text-white/90 hover:text-white')
                       )}
                     >
                       {link.label}

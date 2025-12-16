@@ -81,12 +81,12 @@ export const SponsorsSection = () => {
                 {/* Decorative gradient */}
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
-                {/* Logo Container */}
-                <div className="relative w-24 h-24 mb-4 rounded-xl bg-white shadow-sm overflow-hidden flex items-center justify-center">
+                {/* Logo Container - Made larger */}
+                <div className="relative w-36 h-36 mb-4 rounded-xl bg-white shadow-sm overflow-hidden flex items-center justify-center p-2">
                   <img
                     src={partner.logo}
                     alt={`${partner.name} logo`}
-                    className="w-[90%] h-[90%] object-contain"
+                    className="w-full h-full object-contain"
                   />
                 </div>
 
