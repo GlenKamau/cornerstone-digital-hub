@@ -73,29 +73,45 @@ export const ProductsPreviewSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: index * 0.15 }}
+              whileHover={{ y: -10 }}
               className="group"
             >
               <Link to="/products" className="block">
                 {/* Image */}
                 <div className="relative rounded-2xl overflow-hidden mb-6 aspect-square">
-                  <img
+                  <motion.img
                     src={product.image}
                     alt={product.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.7 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/20 to-transparent" />
                   
                   {/* Icon Badge */}
-                  <div className="absolute top-4 left-4 w-12 h-12 rounded-xl bg-primary flex items-center justify-center shadow-lg">
+                  <motion.div 
+                    className="absolute top-4 left-4 w-12 h-12 rounded-xl bg-primary flex items-center justify-center shadow-lg"
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     <product.icon className="w-6 h-6 text-primary-foreground" />
-                  </div>
+                  </motion.div>
 
                   {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-primary-foreground font-semibold flex items-center gap-2">
+                  <motion.div 
+                    className="absolute inset-0 bg-primary/80 flex items-center justify-center"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.span 
+                      className="text-primary-foreground font-semibold flex items-center gap-2"
+                      initial={{ y: 20, opacity: 0 }}
+                      whileHover={{ y: 0, opacity: 1 }}
+                    >
                       View Details <ArrowRight className="w-5 h-5" />
-                    </span>
-                  </div>
+                    </motion.span>
+                  </motion.div>
                 </div>
 
                 {/* Content */}
@@ -106,13 +122,14 @@ export const ProductsPreviewSection = () => {
                   {product.description}
                 </p>
                 <ul className="flex flex-wrap gap-2">
-                  {product.items.map((item) => (
-                    <li
+                  {product.items.map((item, itemIndex) => (
+                    <motion.li
                       key={item}
-                      className="px-3 py-1 bg-accent rounded-full text-xs font-medium text-accent-foreground"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      className="px-3 py-1 bg-accent rounded-full text-xs font-medium text-accent-foreground cursor-default hover:bg-primary hover:text-primary-foreground transition-colors"
                     >
                       {item}
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
               </Link>

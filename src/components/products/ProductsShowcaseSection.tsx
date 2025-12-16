@@ -131,34 +131,53 @@ export const ProductsShowcaseSection = () => {
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -10 }}
                 onClick={() => setSelectedProduct(product)}
                 className="group card-elevated overflow-hidden cursor-pointer"
               >
                 {/* Image */}
                 <div className="relative h-64 overflow-hidden">
-                  <img
+                  <motion.img
                     src={product.image}
                     alt={product.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.7 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
                   
                   {/* Category Badge */}
-                  <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
+                  <motion.span 
+                    className="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-semibold"
+                    whileHover={{ scale: 1.1 }}
+                  >
                     {product.category}
-                  </span>
+                  </motion.span>
 
                   {/* Icon */}
-                  <div className="absolute bottom-4 right-4 w-12 h-12 rounded-xl bg-background/90 backdrop-blur-sm flex items-center justify-center">
+                  <motion.div 
+                    className="absolute bottom-4 right-4 w-12 h-12 rounded-xl bg-background/90 backdrop-blur-sm flex items-center justify-center"
+                    whileHover={{ rotate: 360, scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     <product.icon className="w-6 h-6 text-primary" />
-                  </div>
+                  </motion.div>
 
                   {/* Click Hint */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="px-4 py-2 rounded-full bg-background/90 backdrop-blur-sm text-sm font-medium shadow-soft">
+                  <motion.div 
+                    className="absolute inset-0 flex items-center justify-center"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.span 
+                      className="px-4 py-2 rounded-full bg-background/90 backdrop-blur-sm text-sm font-medium shadow-soft"
+                      initial={{ y: 20 }}
+                      whileHover={{ y: 0 }}
+                    >
                       Click to view details
-                    </span>
-                  </div>
+                    </motion.span>
+                  </motion.div>
                 </div>
 
                 {/* Content */}
@@ -171,12 +190,13 @@ export const ProductsShowcaseSection = () => {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {product.features.slice(0, 3).map((feature) => (
-                      <span
+                      <motion.span
                         key={feature}
-                        className="px-3 py-1 bg-accent rounded-full text-xs font-medium text-accent-foreground"
+                        whileHover={{ scale: 1.1, y: -2 }}
+                        className="px-3 py-1 bg-accent rounded-full text-xs font-medium text-accent-foreground hover:bg-primary hover:text-primary-foreground transition-colors cursor-default"
                       >
                         {feature}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
                 </div>

@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom';
-import { Leaf, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import logo from '@/assets/leenbenx-logo-new.png';
 
 export const Footer = () => {
+  const socialIcons = [
+    { Icon: Facebook, href: '#', label: 'Facebook' },
+    { Icon: Twitter, href: '#', label: 'Twitter' },
+    { Icon: Instagram, href: '#', label: 'Instagram' },
+    { Icon: Linkedin, href: '#', label: 'LinkedIn' },
+  ];
+
   return (
     <footer className="bg-foreground text-background">
       {/* Main Footer */}
@@ -9,12 +18,19 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <Leaf className="w-6 h-6 text-primary-foreground" />
-              </div>
+            <Link to="/" className="flex items-center gap-3 mb-6 group">
+              <motion.div 
+                whileHover={{ scale: 1.05, rotate: 3 }}
+                className="w-14 h-14 rounded-xl overflow-hidden flex items-center justify-center bg-transparent"
+              >
+                <img 
+                  src={logo} 
+                  alt="Leenbenx Logo" 
+                  className="w-12 h-12 object-contain"
+                />
+              </motion.div>
               <div className="flex flex-col">
-                <span className="font-heading font-bold text-lg text-background leading-tight">
+                <span className="font-heading font-bold text-lg text-background leading-tight group-hover:text-primary transition-colors">
                   Leenbenx
                 </span>
                 <span className="text-xs text-background/60 leading-tight">
@@ -26,14 +42,17 @@ export const Footer = () => {
               Clean Energy for every Home: Efficient Cooking. Healthy Homes. Greener Communities.
             </p>
             <div className="flex gap-3">
-              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (
-                <a
-                  key={index}
-                  href="#"
+              {socialIcons.map(({ Icon, href, label }, index) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  whileHover={{ scale: 1.1, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
                   className="w-10 h-10 rounded-lg bg-background/10 flex items-center justify-center hover:bg-primary transition-colors duration-300"
+                  aria-label={label}
                 >
                   <Icon className="w-5 h-5" />
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
@@ -44,12 +63,14 @@ export const Footer = () => {
             <ul className="space-y-3">
               {['Home', 'About Us', 'Products', 'Contact'].map((item) => (
                 <li key={item}>
-                  <Link
-                    to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
-                    className="text-background/70 hover:text-primary transition-colors duration-300"
-                  >
-                    {item}
-                  </Link>
+                  <motion.div whileHover={{ x: 5 }} transition={{ type: 'spring', stiffness: 300 }}>
+                    <Link
+                      to={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
+                      className="text-background/70 hover:text-primary transition-colors duration-300 inline-block"
+                    >
+                      {item}
+                    </Link>
+                  </motion.div>
                 </li>
               ))}
             </ul>
@@ -61,12 +82,14 @@ export const Footer = () => {
             <ul className="space-y-3">
               {['Jiko Kisasa', 'Rocket Jikos', 'Institutional Stoves', 'Biomass Briquettes', 'Ceramic Liners'].map((item) => (
                 <li key={item}>
-                  <Link
-                    to="/products"
-                    className="text-background/70 hover:text-primary transition-colors duration-300"
-                  >
-                    {item}
-                  </Link>
+                  <motion.div whileHover={{ x: 5 }} transition={{ type: 'spring', stiffness: 300 }}>
+                    <Link
+                      to="/products"
+                      className="text-background/70 hover:text-primary transition-colors duration-300 inline-block"
+                    >
+                      {item}
+                    </Link>
+                  </motion.div>
                 </li>
               ))}
             </ul>
